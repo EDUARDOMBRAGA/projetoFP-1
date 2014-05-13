@@ -4,32 +4,6 @@
 
 {% block conteudo %}
 
-<script type="text/javascript">
-  $(function() {
-    $('#datetimepicker1').datetimepicker({
-      format: 'dd/MM/yyyy hh:mm:ss',
-      language: 'pt-BR'
-    });
-    $('#datetimepicker2').datetimepicker({
-      format: 'dd/MM/yyyy hh:mm:ss',
-      language: 'pt-BR'
-    });
-  });
-  function Validar(form){
-
-    if(form.dataBuscaInicio.value=="" || form.dataBuscaFinal.value==""){
-      alert("Preencha as datas corretamente.");
-      form.dataBuscaFinal.focus();
-      return false;
-    }
-    else{
-      return true;
-    }
-  }
-</script>
-<style type="text/css" media="print">
-  nav, footer, div[align='center'], .btn{display: none;}
-</style>
 <form role="form" method="POST" action="/fluxo/">{% csrf_token %}
   <div class="row">
     <div class="col-md-3" style="margin-left: 20px;">

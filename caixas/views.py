@@ -97,7 +97,7 @@ def fluxoCaixa(request):
                     total -= conta.valor
         except:
             contas = []
-        return render(request, 'caixas/fluxoCaixa.html', {'contas:' contas, 'total': total})
+        return render(request, 'caixas/fluxoCaixa.html', {'contas': contas, 'total': total})
     else:
         return render(request, 'caixas/fluxoCaixa.html')
 
