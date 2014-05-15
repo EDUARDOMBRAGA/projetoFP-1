@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('fluxocaixa.views',
-    url(r'^$', 'fluxoCaixa'),    
+	url(r'^$', 'fluxoListar'),
+	url(r'^pesquisar/$', 'fluxoCaixa'),    
 )

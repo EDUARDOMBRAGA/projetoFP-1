@@ -59,10 +59,11 @@ def caixaPesquisar(request):
 def caixaEditar(request, pk=0):
     try:
         conta = Conta.objects.get(pk=pk)
+        pessoas = Pessoa.objects.all().order_by('nome')
     except:
         return HttpResponseRedirect('/caixas/')
 
-    return render(request, 'caixas/formCaixas.html', {'conta': conta})
+    return render(request, 'caixas/formCaixas.html', {'conta': conta, 'pessoas':pessoas})
 
 def caixaExcluir(request, pk=0):
     try:
@@ -71,43 +72,3 @@ def caixaExcluir(request, pk=0):
         return HttpResponseRedirect('/caixas/')
     except:
         return HttpResponseRedirect('/caixas/')
-
-def fluxoCaixa(request):
-    if request.method == 'POST':
-        pessoa = request.POST.get('pessoa', '').upper()
-        dataInicial = request.POST.get('dataInicial', '')
-        dataFinal = request.POST.get('dataFinal', '')
-        total = 0
-        try:
-            if pessoa != '' and dataInicial == '' and dataFinal == '':
-                sql = ("select cc.* from caixas_conta cc inner join pessoas_pessoa pp on pp.id = cc.pessoa_id where pp.nome like '%s' order by data") % ('%%'+pessoa+'%%')
-                contas = Conta.objects.raw(sql)
-            elif dataInicial != '' and dataFinal != '' and pessoa == '':
-                sql = ("select cc.* from caixas_conta cc where strftime('%s', cc.data) between '%s' and '%s' ") % ('%d/%m/%y', dataInicial, dataFinal)
-                contas = Conta.objects.raw(sql)
-            elif dataInicial != '' and dataFinal != '' and pessoa != '':
-                sql = ("select cc.* from caixas_conta cc inner join pessoas_pessoa pp on pp.id = cc.pessoa_id where pp.nome like '%s' and strftime('%s', cc.data) between '%s' and '%s' order by data") % ('%%'+pessoa+'%%', '%d/%m/%Y', dataInicial, dataFinal)
-                contas = Conta.objects.raw(sql)
-            else:
-                contas = []
-            for conta in contas:
-                if conta.tipo == 'E':
-                    total += conta.valor
-                elif conta.tipo == 'S':
-                    total -= conta.valor
-        except:
-            contas = []
-        return render(request, 'caixas/fluxoCaixa.html', {'contas': contas, 'total': total})
-    else:
-        return render(request, 'caixas/fluxoCaixa.html')
-
-
-
-
-
-
-    
-
-
-
-
