@@ -4,40 +4,54 @@
 
 {% block conteudo %}
 
-
 <div align="center"> 
-  <form  method="POST" action="/fluxocaixa/pesquisar/" >{% csrf_token %}
-    <div class="form-group">
-      <div class="row">
-         <div class="col-md-5">  
-        <input type="date" id="calendario" name="dataInicial" value="{{ dataInicial|date:"d/m/Y" }}" placeholder="01/01/2014" style="float: left"/>
+  <form  class="form-horizontal" role"form" method="POST" action="/fluxocaixa/pesquisar/" >{% csrf_token %}
+    <div class="col-sm-6" style="height:75px;">
+      <div class='col-md-5'>  
+        <div class="form-group">
+          <label> Data Inicial</label>
+          <div >
+          <input type="date" class="form-control" name="dataInicial" value="{{ dataInicial|date:"d/m/Y" }}" placeholder="01/01/2014" style="margin" />
+         
+          </div>
+        </div>
       </div>
-      <div class="col-md-5">          
-        <input type="date" class="datepicker" name="dataFinal" value="{{ dataFinal|date:"d/m/Y" }}" placeholder="01/01/2014" style="float: left">
+
+        <div class="col-md-5">
+        <div class="form-group">          
+          <label> Data Final</label>
+        <div>
+          <input type='date' class="form-control" name="dataFinal" value="{{ dataFinal|date:"d/m/Y" }}" placeholder="01/01/2014"/>
+          
       </div>
-      <div class="col-md-2" align="center">
+      </div>
+      </div>
+    </div>
+     <div class="row">
+        <div class="col-md-2" style="margin-top: 18px;" align="center">
           <button type="submit" class="btn btn-primary">Pesquisar <span class="glyphicon glyphicon-search"></span></button>
         </div>
       </div>
-    </div>  
   </form>
 </div>
 <hr>
 <br />
-<div id="tableFluxo" class="table-responsive">
-      <table class="table table-striped">
+<div class="table-responsive">
+      <table class="table table-bordered">
         <thead>
           <tr>
+            <th>-</th>
             <th>Pessoa</th>
             <th>Descrição da Conta</th>
             <th>Data</th>
             <th>Tipo</th>
-            <th>Total</th>
+            <th class="success">Total</th>
           </tr>
         </thead>
         <tbody>
         {% for conta in contas %}
           <tr>
+            <th>-</th>
             <td>{{ conta.pessoa.nome }}</td>            
             <td>{{ conta.descricao }}</td>
             <td>{{ conta.data|date:"d/m/Y" }}</td>
