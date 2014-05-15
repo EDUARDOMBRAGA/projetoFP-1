@@ -10,8 +10,8 @@ def fluxoListar(request):
 def fluxoCaixa(request):
     if request.method == 'POST':
 
-        dataInicial = request.POST.get('dataInicial', '')
-        dataFinal = request.POST.get('dataFinal', '')
+        dataInicial = request.POST.get('dataInicial', '%d/%m/%Y')
+        dataFinal = request.POST.get('dataFinal', '%d/%m/%Y')
         total = 0
 
         try:
