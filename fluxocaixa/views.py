@@ -8,6 +8,7 @@ def fluxoListar(request):
     return render(request, 'fluxocaixa/fluxoCaixa.html', {'pessoas': pessoas})
 
 def fluxoCaixa(request):
+    
     if request.method == 'POST':
 
         dataInicial = request.POST.get('dataInicial', '%d/%m/%Y')

@@ -3,7 +3,13 @@
 {% block titulo %}Fluxo de Caixa{% endblock titulo %}
 
 {% block conteudo %}
-
+<style type="text/css">
+@media print {
+  .row, hr {
+    display: none;
+  }
+}
+</style>
 <div align="center"> 
   <form  class="form-horizontal" role"form" method="POST" action="/fluxocaixa/pesquisar/" >{% csrf_token %}
     <div class="col-sm-6" style="height:75px;">
@@ -36,7 +42,8 @@
 </div>
 <hr>
 <br />
-<div class="table-responsive">
+<h2 class="text-center"> Relatorio Fluxo de Caixa </h2>
+<div  class="table-responsive">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -62,6 +69,7 @@
         </tbody>
       </table>
 </div>
-<button class="btn btn-primary" onclick="window.print();" style="float:right;"> Imprimir <span class="glyphicon glyphicon-print"></span></button>
+
+<button class="btn btn-primary" onclick="javascript:window.print();" style="float:right;"> Imprimir <span class="glyphicon glyphicon-print"></span></button>
 
 {% endblock conteudo %}
